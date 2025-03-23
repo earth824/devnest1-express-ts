@@ -13,7 +13,11 @@ class TodoController extends Controller {
     this.updateTodo = this.updateTodo.bind(this);
   }
 
-  public async createTodo(req: Request, res: Response, next: NextFunction): Promise<void> {
+  public async createTodo(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     try {
       const newTodo: CreateTodoDto = {
         title: req.body.title,
@@ -27,7 +31,18 @@ class TodoController extends Controller {
     }
   }
 
-  public async getAllTodos(): Promise<void> {}
+  public async getAllTodos(
+    _req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    try {
+      const todos = await this.todoService.getAllTodos();
+      this.sendSuccessResponse(res, { todos });
+    } catch (err) {
+      next(err);
+    }
+  }
 
   public async updateTodo(): Promise<void> {}
 }

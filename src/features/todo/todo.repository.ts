@@ -10,6 +10,10 @@ class TodoRepository implements ITodoRepository {
   findById(id: number): Promise<Omit<Todo, 'password'> | null> {
     return prisma.todo.findUnique({ where: { id } });
   }
+
+  findAll(): Promise<Omit<Todo, 'password'>[]> {
+    return prisma.todo.findMany();
+  }
 }
 
 export default new TodoRepository();

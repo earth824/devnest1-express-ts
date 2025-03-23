@@ -14,6 +14,10 @@ class UserRepository implements IUserRepository {
   create(data: Omit<User, 'id'>): Promise<User> {
     return prisma.user.create({ data });
   }
+
+  findAll(): Promise<Omit<User, 'password'>[]> {
+    return prisma.user.findMany();
+  }
 }
 
 export default new UserRepository();

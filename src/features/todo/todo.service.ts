@@ -10,6 +10,10 @@ class TodoService implements ITodoService {
   createTodo(data: CreateTodoDto): Promise<Todo> {
     return this.todoRepository.create(data);
   }
+
+  getAllTodos(): Promise<Todo[]> {
+    return this.todoRepository.findAll();
+  }
 }
 
 export default new TodoService(todoRepository);
